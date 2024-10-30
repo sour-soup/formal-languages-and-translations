@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         String input;
         try {
-            input = String.join("", Files.readAllLines(Paths.get("input.txt")));
+            input = String.join("\n", Files.readAllLines(Paths.get("input.txt")));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
