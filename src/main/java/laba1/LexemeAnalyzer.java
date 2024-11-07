@@ -26,7 +26,7 @@ public class LexemeAnalyzer {
         while (index < input.length()) {
             char currentSymbol = input.charAt(index);
             int add = 1;
-            final boolean isLetterOrDigitOrWhileSpace = Character.isLetterOrDigit(currentSymbol) || Character.isWhitespace(currentSymbol);
+            final boolean isLetterOrDigitOrWhiteSpace = Character.isLetterOrDigit(currentSymbol) || Character.isWhitespace(currentSymbol);
             final boolean isSpecialSymbolOrWhiteSpace = SPECIAL_SYMBOLS.contains(currentSymbol) || Character.isWhitespace(currentSymbol);
 
             currentState = switch (currentState) {
@@ -92,7 +92,7 @@ public class LexemeAnalyzer {
                     }
                 }
                 case ARITHMETIC -> {
-                    if (isLetterOrDigitOrWhileSpace) {
+                    if (isLetterOrDigitOrWhiteSpace) {
                         lexemes.add(new Lexeme(LexemeType.ARITHMETIC, LexemeCategory.OPERATION, currentLexeme.toString()));
                         currentLexeme.setLength(0);
                         add = 0;
@@ -109,7 +109,7 @@ public class LexemeAnalyzer {
                     } else if (currentSymbol == '>') {
                         currentLexeme.append(currentSymbol);
                         yield State.COMPARISON_NE;
-                    } else if (isLetterOrDigitOrWhileSpace) {
+                    } else if (isLetterOrDigitOrWhiteSpace) {
                         lexemes.add(new Lexeme(LexemeType.COMPARISON, LexemeCategory.OPERATION, currentLexeme.toString()));
                         currentLexeme.setLength(0);
                         add = 0;
@@ -123,7 +123,7 @@ public class LexemeAnalyzer {
                     if (currentSymbol == '=') {
                         currentLexeme.append(currentSymbol);
                         yield State.COMPARISON_E;
-                    } else if (isLetterOrDigitOrWhileSpace) {
+                    } else if (isLetterOrDigitOrWhiteSpace) {
                         lexemes.add(new Lexeme(LexemeType.COMPARISON, LexemeCategory.OPERATION, currentLexeme.toString()));
                         currentLexeme.setLength(0);
                         add = 0;
@@ -137,7 +137,7 @@ public class LexemeAnalyzer {
                     if (currentSymbol == '=') {
                         currentLexeme.append(currentSymbol);
                         yield State.COMPARISON_E;
-                    } else if (isLetterOrDigitOrWhileSpace) {
+                    } else if (isLetterOrDigitOrWhiteSpace) {
                         lexemes.add(new Lexeme(LexemeType.ASSIGNMENT, LexemeCategory.OPERATION, currentLexeme.toString()));
                         currentLexeme.setLength(0);
                         add = 0;
@@ -148,7 +148,7 @@ public class LexemeAnalyzer {
                     }
                 }
                 case COMPARISON_E, COMPARISON_NE -> {
-                    if (isLetterOrDigitOrWhileSpace) {
+                    if (isLetterOrDigitOrWhiteSpace) {
                         lexemes.add(new Lexeme(LexemeType.COMPARISON, LexemeCategory.OPERATION, currentLexeme.toString()));
                         currentLexeme.setLength(0);
                         add = 0;
