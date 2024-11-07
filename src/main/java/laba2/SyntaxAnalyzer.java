@@ -80,23 +80,21 @@ public class SyntaxAnalyzer {
     }
 
     private void parseArithmeticExpression() {
-        parseSummable();
-        while (currentLexeme != null && currentLexeme.type() == LexemeType.ARITHMETIC && currentLexeme.value().equals("*")) {
+        parseArithmeticSubExpression();
+        while (currentLexeme != null && currentLexeme.type() == LexemeType.ARITHMETIC
+               && "*/".contains(currentLexeme.value())) {
             expect(LexemeType.ARITHMETIC);
-            parseSummable();
+            parseArithmeticSubExpression();
         }
     }
 
-    private void parseSummable() {
-        parseMultiplier();
-        while (currentLexeme != null && currentLexeme.type() == LexemeType.ARITHMETIC && currentLexeme.value().equals("+")) {
-            expect(LexemeType.ARITHMETIC);
-            parseMultiplier();
-        }
-    }
-
-    private void parseMultiplier() {
+    private void parseArithmeticSubExpression() {
         parseOperand();
+        while (currentLexeme != null && currentLexeme.type() == LexemeType.ARITHMETIC
+               && "+-".contains(currentLexeme.value())) {
+            expect(LexemeType.ARITHMETIC);
+            parseOperand();
+        }
     }
 
     private void parseOperand() {
