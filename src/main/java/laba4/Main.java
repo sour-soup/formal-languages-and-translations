@@ -42,7 +42,7 @@ public class Main {
                     polizEntries.get(i).type().toString(),
                     polizEntries.get(i).value().toString());
         }
-
+        System.out.println("\nИнтерпретация:");
         Interpreter interpreter = new Interpreter(polizEntries);
         interpreter.execute();
     }
