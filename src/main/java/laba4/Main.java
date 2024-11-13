@@ -32,6 +32,7 @@ public class Main {
             System.out.println("Синтаксический анализ выполнен успешно!");
         } catch (SyntaxException e) {
             System.out.println("Синтаксическая ошибка: " + e.getMessage());
+            return;
         }
         System.out.println();
 
