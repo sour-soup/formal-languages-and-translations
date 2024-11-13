@@ -111,8 +111,8 @@ public class SyntaxAnalyzer {
             expect(LexemeType.ASSIGNMENT);
             parseArithmeticExpression();
 
-            polizGenerator.addVariable(variable);
             polizGenerator.addCommand(Command.SET);
+            polizGenerator.addVariable(variable);
         } else if (currentLexeme.type() == LexemeType.OUTPUT) {
             expect(LexemeType.OUTPUT);
             parseOperand();
